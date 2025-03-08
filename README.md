@@ -1,11 +1,32 @@
 ## Table of Contents
 
+- [Running Cell Ranger vdj](#running-cell-ranger-vdj)
+  - [Data](#data)
 - [Adaptive Immune Receptor Repertoire analysis](#adaptive-immune-receptor-repertoire-analysis)
   - [Setup](#setup)
   - [Test results](#test-results)
   - [Input samplesheet](#input-samplesheet)
     - [Bulk](#bulk)
     - [Single cell](#single-cell)
+
+# Running Cell Ranger vdj
+
+[A tutorial on running the cellranger vdj pipeline](https://support.10xgenomics.com/single-cell-vdj/software/pipelines/latest/tutorial/tutorial-vdj).
+
+Cell Ranger's vdj pipeline
+
+The cellranger vdj pipeline takes FASTQ files from cellranger mkfastq,BCL Convert, or bcl2fastq for V(D)J libraries and performs sequence assembly and paired clonotype calling. It uses the Chromium cellular barcodes and UMIs to assemble V(D)J transcripts per cell. Clonotypes and CDR3 sequences are output as a .vloupe file which can be loaded into the Loupe V(D)J Browser.
+
+## Data
+
+[Human B cells from a Healthy Donor, 1k cells](https://www.10xgenomics.com/datasets/human-b-cells-from-a-healthy-donor-1-k-cells-2-standard-6-0-0)
+
+* Universal 5' Gene Expression dataset analyzed using Cell Ranger 6.0.0
+* Human CD19+ B cells of a healthy male donor aged 27 were obtained by 10x Genomics from AllCells.
+* Gene Expression and BCR Enriched libraries were generated from 1,650 cells (89% viable, expected cell recovery 915) as described in the Chromium Next GEM Single Cell 5' Reagent Kits v2 (Dual Index) User Guide (CG000331 Rev A) and sequenced on an Illumina NovaSeq 6000.
+* These libraries were analyzed using the new Cell Ranger multi pipeline, which combines Gene Expression, Feature Barcode, TCR enriched, and BCR enriched libraries from the same sample. Cell Ranger multi enables consistent cell calling between gene expression and VDJ libraries.
+* Sequencing Configuration - Paired-end (26X90), dual-indexed sequencing. Read 1: 26 cycles, i7 index: 10 cycles, i5 index: 10 cycles, Read 2: 90 cycles
+* This dataset is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) license. 10x citation guidelines available here.
 
 # Adaptive Immune Receptor Repertoire analysis
 
