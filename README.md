@@ -1,3 +1,9 @@
+## Table of Contents
+
+- [Adaptive Immune Receptor Repertoire analysis](#adaptive-immune-receptor-repertoire-analysis)
+  - [Setup](#setup)
+  - [Test results](#test-results)
+
 # Adaptive Immune Receptor Repertoire analysis
 
 [nf-core/airrflow](https://nf-co.re/airrflow/4.2.0/):
@@ -65,4 +71,28 @@ Duration    : 10m 40s
 CPU hours   : 0.7
 Succeeded   : 221
 ```
+
+## Test results
+
+Results were written to `/data/airrflow_test`. See the [nf-core/airrflow output page](https://nf-co.re/airrflow/4.2.0/docs/output/) for more information.
+
+```console
+tree -L 1 --charset ascii /data/airrflow_test
+```
+```
+/data/airrflow_test
+|-- Airrflow_report.html
+|-- clonal_analysis
+|-- fastp
+|-- fastqc
+|-- multiqc
+|-- parsed_logs
+|-- pipeline_info
+|-- presto
+|-- qc-filtering
+|-- repertoire_comparison
+|-- report_file_size
+`-- vdj_annotation
+```
+
 
