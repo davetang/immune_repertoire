@@ -3,6 +3,7 @@
 - [Adaptive Immune Receptor Repertoire analysis](#adaptive-immune-receptor-repertoire-analysis)
   - [Setup](#setup)
   - [Test results](#test-results)
+  - [Input samplesheet](#input-samplesheet)
 
 # Adaptive Immune Receptor Repertoire analysis
 
@@ -95,4 +96,23 @@ tree -L 1 --charset ascii /data/airrflow_test
 `-- vdj_annotation
 ```
 
+## Input samplesheet
 
+The [required input file](https://nf-co.re/airrflow/usage#input-samplesheet) for processing raw BCR or TCR bulk targeted sequencing data is a sample sheet in TSV format (tab separated). The following columns are required:
+
+* `sample_id`
+* `filename_R1`
+* `filename_R2`
+* `subject_id`
+* `species`
+* `tissue`
+* `pcr_target_locus`
+* `single_cell`
+* `sex`
+* `age`
+* `biomaterial_provider`
+
+| sample_id | filename_R1                     | filename_R2                     | filename_I1                     | subject_id | species | pcr_target_locus | tissue | sex    | age | biomaterial_provider | single_cell | intervention   | collection_time_point_relative | cell_subset  |
+| -         | -                               | -                               | -                               | -          | -       | -                | -      | -      | -   | -                    | -           | -              | -                              | -            |
+| sample01  | sample1_S8_L001_R1_001.fastq.gz | sample1_S8_L001_R2_001.fastq.gz | sample1_S8_L001_I1_001.fastq.gz | Subject02  | human   | IG               | blood  | NA     | 53  | sequencing_facility  | FALSE       | Drug_treatment | Baseline                       | plasmablasts |
+| sample02  | sample2_S8_L001_R1_001.fastq.gz | sample2_S8_L001_R2_001.fastq.gz | sample2_S8_L001_I1_001.fastq.gz | Subject02  | human   | TR               | blood  | female | 78  | sequencing_facility  | FALSE       | Drug_treatment | Baseline                       | plasmablasts |
