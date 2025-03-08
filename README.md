@@ -4,6 +4,8 @@
   - [Setup](#setup)
   - [Test results](#test-results)
   - [Input samplesheet](#input-samplesheet)
+    - [Bulk](#bulk)
+    - [Single cell](#single-cell)
 
 # Adaptive Immune Receptor Repertoire analysis
 
@@ -98,7 +100,9 @@ tree -L 1 --charset ascii /data/airrflow_test
 
 ## Input samplesheet
 
-The [required input file](https://nf-co.re/airrflow/usage#input-samplesheet) for processing raw BCR or TCR bulk targeted sequencing data is a sample sheet in TSV format (tab separated). The following columns are required:
+### Bulk
+
+The [required input file](https://nf-co.re/airrflow/usage#fastq-input-samplesheet-bulk-airr-sequencing) for processing raw BCR or TCR bulk targeted sequencing data is a sample sheet in TSV format (tab separated). The following columns are required:
 
 * `sample_id`
 * `filename_R1`
@@ -116,3 +120,43 @@ The [required input file](https://nf-co.re/airrflow/usage#input-samplesheet) for
 | -         | -                               | -                               | -                               | -          | -       | -                | -      | -      | -   | -                    | -           | -              | -                              | -            |
 | sample01  | sample1_S8_L001_R1_001.fastq.gz | sample1_S8_L001_R2_001.fastq.gz | sample1_S8_L001_I1_001.fastq.gz | Subject02  | human   | IG               | blood  | NA     | 53  | sequencing_facility  | FALSE       | Drug_treatment | Baseline                       | plasmablasts |
 | sample02  | sample2_S8_L001_R1_001.fastq.gz | sample2_S8_L001_R2_001.fastq.gz | sample2_S8_L001_I1_001.fastq.gz | Subject02  | human   | TR               | blood  | female | 78  | sequencing_facility  | FALSE       | Drug_treatment | Baseline                       | plasmablasts |
+
+### Single cell
+
+The [required input file](https://nf-co.re/airrflow/usage#fastq-input-samplesheet-single-cell-sequencing) for processing raw BCR or TCR single cell targeted sequencing data is a sample sheet in TSV format (tab separated). The columns are required:
+
+* `sample_id`
+* `filename_R1`
+* `filename_R2`
+* `subject_id`
+* `species`
+* `tissue`
+* `pcr_target_locus`
+* `single_cell`
+* `sex`
+* `age`
+* `biomaterial_provider`
+
+Any other columns you add will be available in the final repertoire file as extra metadata fields. You can refer to the bulk fastq input section for documentation on the individual columns. An example samplesheet is:
+
+| sample_id | filename_R1                      | filename_R2                      | subject_id | species | pcr_target_locus | tissue | sex    | age | biomaterial_provider | single_cell |
+| -         | -                                | -                                | -          | -       | -                | -      | -      | -   | -                    | -           |
+| sample01  | sample01_S1_L001_R1_001.fastq.gz | sample01_S1_L001_R2_001.fastq.gz | Subject02  | human   | IG               | blood  | NA     | 53  | sequencing_facility  | TRUE        |
+| sample02  | sample02_S1_L001_R1_001.fastq.gz | sample02_S1_L001_R2_001.fastq.gz | Subject02  | human   | TR               | blood  | female | 78  | sequencing_facility  | TRUE        |
+
+
+FASTQ files must conform with the 10x Genomics Cell Ranger naming conventions with the same sample name as provided in the `sample_id` column:
+
+```
+>**[SAMPLE-NAME] S[CHIP-NUMBER]_ L00[LANE-NUMBER]_[R1/R2]_001.fastq.gz**
+```
+
+Read type is one of
+
+* I1: Sample index read (optional)
+* I2: Sample index read (optional)
+* R1: Read 1
+* R2: Read 2
+
+It is possible to provide several FASTQ files per sample (e.g. sequenced over different chips or lanes). In this case the different FASTQ files per sample will be provided to the same Cell Ranger process. These rows should then have an identical `sample_id` field.
+
