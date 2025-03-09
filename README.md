@@ -45,6 +45,48 @@ The cellranger vdj pipeline takes FASTQ files from cellranger mkfastq,BCL Conver
 * Sequencing Configuration - Paired-end (26X90), dual-indexed sequencing. Read 1: 26 cycles, i7 index: 10 cycles, i5 index: 10 cycles, Read 2: 90 cycles
 * This dataset is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) license. 10x citation guidelines available here.
 
+FASTQ indexes.
+
+```console
+zcat sc5p_v2_hs_B_1k_b_S1_L001_I1_001.fastq.gz | head -4
+```
+```
+@A00984:155:HNW5YDMXX:1:1101:12970:1000 1:N:0:ACCAGACAAC+AGGAACTAGG
+ACCAGACAAC
++
+FFFFFFFF:F
+```
+```console
+zcat sc5p_v2_hs_B_1k_b_S1_L001_I2_001.fastq.gz | head -4
+```
+```
+@A00984:155:HNW5YDMXX:1:1101:12970:1000 2:N:0:ACCAGACAAC+AGGAACTAGG
+AGGAACTAGG
++
+,FFF:FFFFF
+```
+
+FASTQ sequences.
+
+```console
+zcat sc5p_v2_hs_B_1k_b_S1_L001_R1_001.fastq.gz | head -4
+```
+```
+@A00984:155:HNW5YDMXX:1:1101:12970:1000 1:N:0:ACCAGACAAC+AGGAACTAGG
+GTCATTTGTCTTTCATAGACGTCGGT
++
+FFFFFFFFFFFFFFFF,FFFFFFFFF
+```
+```console
+zcat sc5p_v2_hs_B_1k_b_S1_L001_R2_001.fastq.gz | head -4
+```
+```
+@A00984:155:HNW5YDMXX:1:1101:12970:1000 2:N:0:ACCAGACAAC+AGGAACTAGG
+CTACACCTCTCATGTCTCTTCACCGTGCCAGACTAGAGTCAAGCTCAACAGGGTCTTCTTTCCCCGCTGATTCCGCCAAGCCCGTTCCCT
++
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:F:FFFFFF:FFFFFFFFFFFFFFFFFFFFFFFF
+```
+
 # Adaptive Immune Receptor Repertoire analysis
 
 [nf-core/airrflow](https://nf-co.re/airrflow/4.2.0/):
