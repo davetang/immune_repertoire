@@ -1,7 +1,9 @@
 ## Table of Contents
 
-- [Running Cell Ranger vdj](#running-cell-ranger-vdj)
-  - [Data](#data)
+- [Introduction](#introduction)
+  - [10x Genomics V(D)J Platform](#10x-genomics-vdj-platform)
+  - [Running Cell Ranger vdj](#running-cell-ranger-vdj)
+    - [Data](#data)
 - [Adaptive Immune Receptor Repertoire analysis](#adaptive-immune-receptor-repertoire-analysis)
   - [Setup](#setup)
   - [Test results](#test-results)
@@ -9,7 +11,22 @@
     - [Bulk](#bulk)
     - [Single cell](#single-cell)
 
-# Running Cell Ranger vdj
+# Introduction
+
+* Immune repertoire analysis is the study of the **diversity** and **composition** of antigen receptors expressed by B Cells Receptors (BCRs) and T Cells Receptors (TCRs).
+* By sequencing the Variable (V), Diversity (D), and Joining (J) gene segments of these receptors, we can assess the clonal diversity, expansion, and specificity of immune cells in different conditions.
+
+## 10x Genomics V(D)J Platform
+
+* The **10x Genomics Chromium Single Cell Immune Profiling** platform allows high-throughput single-cell sequencing of V(D)J regions for both BCRs and TCRs.
+* Antigen receptor sequences are typically linked to single-cell gene expression data.
+* The **Chromium Controller** encapsulates single cells into droplets, each containing a unique barcoded bead.
+    * cDNAs are labelled during reverse transcription.
+* Full-length V(D)J transcripts  are amplified from single cells.
+* Construct libraries separately for TCR or BCR sequences.
+* Cell Ranger is used to aligns reads, reconstructs full-length V(D)J sequences, and clusters clonotypes.
+
+## Running Cell Ranger vdj
 
 [A tutorial on running the cellranger vdj pipeline](https://support.10xgenomics.com/single-cell-vdj/software/pipelines/latest/tutorial/tutorial-vdj).
 
@@ -17,7 +34,7 @@ Cell Ranger's vdj pipeline
 
 The cellranger vdj pipeline takes FASTQ files from cellranger mkfastq,BCL Convert, or bcl2fastq for V(D)J libraries and performs sequence assembly and paired clonotype calling. It uses the Chromium cellular barcodes and UMIs to assemble V(D)J transcripts per cell. Clonotypes and CDR3 sequences are output as a .vloupe file which can be loaded into the Loupe V(D)J Browser.
 
-## Data
+### Data
 
 [Human B cells from a Healthy Donor, 1k cells](https://www.10xgenomics.com/datasets/human-b-cells-from-a-healthy-donor-1-k-cells-2-standard-6-0-0)
 
