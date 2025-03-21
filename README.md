@@ -168,6 +168,8 @@ HumanB_Cell/outs
 `-- web_summary.html
 ```
 
+The files above (in the `outs` directory) have been uploaded to my web server; use the path `https://davetang.org/file/HumanB_Cell/outs/` and the file name above to access/download them. For example to see the web summary head to <https://davetang.org/file/HumanB_Cell/outs/web_summary.html>.
+
 # Adaptive Immune Receptor Repertoire analysis
 
 [nf-core/airrflow](https://nf-co.re/airrflow/4.2.0/):
