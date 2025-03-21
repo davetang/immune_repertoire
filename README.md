@@ -4,6 +4,7 @@
   - [10x Genomics V(D)J Platform](#10x-genomics-vdj-platform)
   - [Running Cell Ranger vdj](#running-cell-ranger-vdj)
     - [Data](#data)
+    - [Cell Ranger](#cell-ranger)
 - [Adaptive Immune Receptor Repertoire analysis](#adaptive-immune-receptor-repertoire-analysis)
   - [Setup](#setup)
   - [Test results](#test-results)
@@ -32,7 +33,7 @@
 
 Cell Ranger's vdj pipeline
 
-The cellranger vdj pipeline takes FASTQ files from cellranger mkfastq,BCL Convert, or bcl2fastq for V(D)J libraries and performs sequence assembly and paired clonotype calling. It uses the Chromium cellular barcodes and UMIs to assemble V(D)J transcripts per cell. Clonotypes and CDR3 sequences are output as a .vloupe file which can be loaded into the Loupe V(D)J Browser.
+The cellranger vdj pipeline takes FASTQ files from `cellranger mkfastq`, `BCL Convert`, or `bcl2fastq` for V(D)J libraries and performs sequence assembly and paired clonotype calling. It uses the Chromium cellular barcodes and UMIs to assemble V(D)J transcripts per cell. Clonotypes and CDR3 sequences are output as a `.vloupe` file which can be loaded into the Loupe V(D)J Browser.
 
 ### Data
 
@@ -85,6 +86,86 @@ zcat sc5p_v2_hs_B_1k_b_S1_L001_R2_001.fastq.gz | head -4
 CTACACCTCTCATGTCTCTTCACCGTGCCAGACTAGAGTCAAGCTCAACAGGGTCTTCTTTCCCCGCTGATTCCGCCAAGCCCGTTCCCT
 +
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:F:FFFFFF:FFFFFFFFFFFFFFFFFFFFFFFF
+```
+
+### Cell Ranger
+
+Run Cell Ranger vdj.
+
+```console
+cellranger vdj \
+    --id=HumanB_Cell \
+    --reference=../refdata-cellranger-vdj-GRCh38-alts-ensembl-7.1.0 \
+    --fastqs=../dataset-vdj-practice/sc5p_v2_hs_B_1k_multi_5gex_b_fastqs/sc5p_v2_hs_B_1k_b_fastqs \
+    --sample=sc5p_v2_hs_B_1k_b \
+    --localcores=4 \
+    --localmem=60
+```
+
+Output will in a directory with the same name as the argument used for `--id`, e.g., `HumanB_Cell`.
+
+```console
+tree --charset ascii -L 1 HumanB_Cell
+```
+```
+HumanB_Cell
+|-- _cmdline
+|-- extras
+|-- _filelist
+|-- _finalstate
+|-- HumanB_Cell.mri.tgz
+|-- _invocation
+|-- _jobmode
+|-- _log
+|-- _mrosource
+|-- outs
+|-- _perf
+|-- _perf._truncated_
+|-- SC_VDJ_ASSEMBLER_CS
+|-- _sitecheck
+|-- _tags
+|-- _timestamp
+|-- _uuid
+|-- _vdrkill
+`-- _versions
+```
+
+Outputs in `outs`.
+
+```console
+tree --charset ascii -L 1 HumanB_Cell/outs
+```
+```
+HumanB_Cell/outs
+|-- airr_rearrangement.tsv
+|-- all_contig_annotations.bed
+|-- all_contig_annotations.csv
+|-- all_contig_annotations.json
+|-- all_contig.bam
+|-- all_contig.bam.bai
+|-- all_contig.fasta
+|-- all_contig.fasta.fai
+|-- all_contig.fastq
+|-- cell_barcodes.json
+|-- clonotypes.csv
+|-- concat_ref.bam
+|-- concat_ref.bam.bai
+|-- concat_ref.fasta
+|-- concat_ref.fasta.fai
+|-- consensus_annotations.csv
+|-- consensus.bam
+|-- consensus.bam.bai
+|-- consensus.fasta
+|-- consensus.fasta.fai
+|-- donor_regions.fa
+|-- filtered_contig_annotations.csv
+|-- filtered_contig.fasta
+|-- filtered_contig.fastq
+|-- metrics_summary.csv
+|-- vdj_contig_info.pb
+|-- vdj_reference
+|-- vloupe.vloupe
+`-- web_summary.html
 ```
 
 # Adaptive Immune Receptor Repertoire analysis
