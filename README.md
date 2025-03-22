@@ -13,6 +13,7 @@
     - [Bulk](#bulk)
     - [Single cell](#single-cell)
     - [Assembled input samplesheet](#assembled-input-samplesheet)
+    - [Troubleshooting](#troubleshooting)
 
 # Introduction
 
@@ -424,3 +425,105 @@ An example samplesheet is:
 | -                                           | -       | -          | -                      | -      | -    | -   | -                    | -                | -           |
 | sc5p_v2_hs_PBMC_1k_b_airr_rearrangement.tsv | human   | subject_x  | sc5p_v2_hs_PBMC_1k_5fb | PBMC   | NA   | NA  | 10x Genomics         | IG               | TRUE        |
 | bulk-Laserson-2014.fasta                    | human   | PGP1       | PGP1                   | PBMC   | male | NA  | Laserson-2014        | IG               | FALSE       |
+
+### Troubleshooting
+
+The process `NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:FIND_CLONAL_THRESHOLD` requires 16 CPUs by default.
+
+```console
+cat error.log
+```
+```
+Mar-22 22:35:13.429 [Task submitter] ERROR nextflow.processor.TaskProcessor - Error executing process > 'NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:FIND_CLONAL_THRESHOLD (all_reps)'
+
+Caused by:
+  Process requirement exceeds available CPUs -- req: 16; avail: 6
+
+
+Command executed:
+
+  Rscript -e "enchantr::enchantr_report('find_threshold', \
+          report_params=list('input'='find_threshold_samplesheet.txt',\
+              'cloneby'='subject_id',\
+              'crossby'='subject_id',\
+              'singlecell'='single_cell',\
+              'outdir'=getwd(),\
+              'nproc'=16,\
+              'outname'='all_reps',\
+              'log'='all_reps_threshold_command_log',\
+              'logo'='nf-core-airrflow_logo_reports.png' ,'findthreshold_cutoff'='user','findthreshold_edge'=0.9,'findthreshold_method'='gmm','findthreshold_model'='gamma-norm','findthreshold_spc'=0.995))"
+
+      cp -r enchantr all_reps_dist_report && rm -rf enchantr
+
+      echo "NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:FIND_CLONAL_THRESHOLD": > versions.yml
+      Rscript -e "cat(paste0('  enchantr: ',packageVersion('enchantr'),'
+  '))" >> versions.yml
+
+Command exit status:
+  -
+
+Command output:
+  (empty)
+```
+
+After some searching, the script is run via the Nextflow script `find_threshold.nf`.
+
+```nextflow
+    script:
+    def args = task.ext.args ? asString(task.ext.args) : ''
+    """
+    Rscript -e "enchantr::enchantr_report('find_threshold', \\
+        report_params=list('input'='${tabs_samplesheet}',\\
+            'cloneby'='${params.cloneby}',\\
+            'crossby'='${params.crossby}',\\
+            'singlecell'='${params.singlecell}',\\
+            'outdir'=getwd(),\\
+            'nproc'=${task.cpus},\\
+            'outname'='all_reps',\\
+            'log'='all_reps_threshold_command_log',\\
+            'logo'='${logo}' ${args}))"
+
+    cp -r enchantr all_reps_dist_report && rm -rf enchantr
+
+    echo "${task.process}": > versions.yml
+    Rscript -e "cat(paste0('  enchantr: ',packageVersion('enchantr'),'\n'))" >> versions.yml
+    """
+```
+
+* Set `-process.cpus=4` but got the same error.
+* Searched again and found that some CPU settings are set in `base.config` and noticed:
+
+```nextflow
+withLabel:process_long_parallelized {
+    time   = { 30.h  * task.attempt }
+    cpus   = { 16    * task.attempt }
+    memory = { 72.GB * task.attempt }
+}
+```
+
+* Looked again at `find_threshold.nf` and saw the label:
+
+```nextflow
+process FIND_THRESHOLD {
+    tag "all_reps"
+
+    label 'process_long_parallelized'
+```
+
+* Manually changed `base.config` to 4 cpus.
+* That worked but got the new error: `  Process requirement exceeds available memory -- req: 72 GB; avail: 62.6 GB`
+* Manually changed `base.config` to 52.GB.
+
+New error:
+
+```
+ERROR ~ Error executing process > 'NFCORE_AIRRFLOW:AIRRFLOW:REPERTOIRE_ANALYSIS_REPORTING:AIRRFLOW_REPORT (all_reps)'
+
+Caused by:
+  Process requirement exceeds available CPUs -- req: 12; avail: 6
+```
+
+* Looked in `airrflow_report.nf` and saw that it uses `label 'process_high'`
+* Manually changed `process_high` to 4 cpus and 52.GB
+
+Finally `-[nf-core/airrflow] Pipeline completed successfully-`.

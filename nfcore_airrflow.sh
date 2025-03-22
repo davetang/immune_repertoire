@@ -9,8 +9,9 @@ if [[ ! -e airr_rearrangement.tsv ]]; then
 fi
 
 nextflow run /data/nf-core/airrflow/4_2_0/main.nf \
+   -resume \
    -profile singularity \
    --input assembled_samplesheet.tsv \
    --mode assembled \
-   --max_cpus 4 \
+   -process.cpus=4 \
    --outdir results
