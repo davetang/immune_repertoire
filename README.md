@@ -527,3 +527,5 @@ Caused by:
 * Manually changed `process_high` to 4 cpus and 52.GB
 
 Finally `-[nf-core/airrflow] Pipeline completed successfully-`.
+
+(Final note: removed `-process.cpus=4` from `./nfcore_airrflow.sh` and the workflow could still successfully complete.)
