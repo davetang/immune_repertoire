@@ -1,0 +1,2 @@
+filename	species	subject_id	sample_id	tissue	sex	age	biomaterial_provider	pcr_target_locus	single_cell
+airr_rearrangement.tsv	human	subject_x	sc5p_v2_hs_B_1k_b	PBMC	male	27	10x Genomics	IG	TRUE
