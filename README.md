@@ -322,6 +322,21 @@ tree -L 1 --charset ascii /data/airrflow_test
 
 ## Input samplesheet
 
+TSV format:
+
+* `sample_id`: Sample ID assigned by submitter, unique within study.
+* `filename_R1`: path to fastq file with first mates of paired-end sequencing.
+* `filename_R2`: path to fastq file with second mates of paired-end sequencing.
+* `filename_I`1 (optional): path to fastq with illumina index and UMI (unique molecular identifier) barcode.
+* `subject_id`: Subject ID assigned by submitter, unique within study.
+* `species`: species from which the sample was taken. Supported species are human and mouse.
+* `tissue`: tissue from which the sample was taken. E.g. blood, PBMC, brain.
+* `pcr_target_locus`: Designation of the target locus (`IG` or `TR`).
+* `biomaterial_provider`: Institution / research group that provided the samples.
+* `sex`: Subject biological sex (female, male, etc.).
+* `age`: Subject biological age.
+* `single_cell`: TRUE or FALSE.
+
 ### Bulk
 
 The [required input file](https://nf-co.re/airrflow/usage#fastq-input-samplesheet-bulk-airr-sequencing) for processing raw BCR or TCR bulk targeted sequencing data is a sample sheet in TSV format (tab separated). The following columns are required:
