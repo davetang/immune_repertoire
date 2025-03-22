@@ -211,10 +211,10 @@ The `airr_rearrangement.tsv` [file](https://support.10xgenomics.com/single-cell-
 | duplicate_count    | The number of unique molecular identifiers associated with this rearrangement.          |
 | is_cell            | Is this rearrangement cell-associated?                                                  |
 
-[Example](https://davetang.org/file/HumanB_Cell/outs/airr_rearrangement.tsv):
+An example `airr_rearrangement.tsv` file.
 
 ```console
-head /data/10x/runs/HumanB_Cell/outs/airr_rearrangement.tsv
+wget -q -O - https://davetang.org/file/HumanB_Cell/outs/airr_rearrangement.tsv | head
 ```
 ```
 cell_id	clone_id	sequence_id	sequence	sequence_aa	productive	rev_comp	v_call	v_cigar	d_call	d_cigar	j_call	j_cigar	c_call	c_cigar	sequence_alignment	germline_alignment	junction	junction_aa	junction_length	junction_aa_length	v_sequence_start	v_sequence_end	d_sequence_start	d_sequence_end	j_sequence_start	j_sequence_end	c_sequence_start	c_sequence_end	consensus_count	duplicate_count	is_cell
