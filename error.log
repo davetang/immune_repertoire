@@ -1,0 +1,30 @@
+Mar-22 22:35:13.429 [Task submitter] ERROR nextflow.processor.TaskProcessor - Error executing process > 'NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:FIND_CLONAL_THRESHOLD (all_reps)'
+
+Caused by:
+  Process requirement exceeds available CPUs -- req: 16; avail: 6
+
+
+Command executed:
+
+  Rscript -e "enchantr::enchantr_report('find_threshold', \
+          report_params=list('input'='find_threshold_samplesheet.txt',\
+              'cloneby'='subject_id',\
+              'crossby'='subject_id',\
+              'singlecell'='single_cell',\
+              'outdir'=getwd(),\
+              'nproc'=16,\
+              'outname'='all_reps',\
+              'log'='all_reps_threshold_command_log',\
+              'logo'='nf-core-airrflow_logo_reports.png' ,'findthreshold_cutoff'='user','findthreshold_edge'=0.9,'findthreshold_method'='gmm','findthreshold_model'='gamma-norm','findthreshold_spc'=0.995))"
+  
+      cp -r enchantr all_reps_dist_report && rm -rf enchantr
+  
+      echo "NFCORE_AIRRFLOW:AIRRFLOW:CLONAL_ANALYSIS:FIND_CLONAL_THRESHOLD": > versions.yml
+      Rscript -e "cat(paste0('  enchantr: ',packageVersion('enchantr'),'
+  '))" >> versions.yml
+
+Command exit status:
+  -
+
+Command output:
+  (empty)
