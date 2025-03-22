@@ -11,6 +11,7 @@
   - [Input samplesheet](#input-samplesheet)
     - [Bulk](#bulk)
     - [Single cell](#single-cell)
+    - [Assembled input samplesheet](#assembled-input-samplesheet)
 
 # Introduction
 
@@ -323,3 +324,30 @@ Read type is one of
 
 It is possible to provide several FASTQ files per sample (e.g. sequenced over different chips or lanes). In this case the different FASTQ files per sample will be provided to the same Cell Ranger process. These rows should then have an identical `sample_id` field.
 
+### Assembled input samplesheet
+
+* The required input file for processing raw BCR or TCR bulk targeted sequencing data is a sample sheet in TSV format (tab separated). The following columns are required:
+    * `sample_id`
+    * `filename`
+    * `subject_id`
+    * `species`
+    * `tissue`
+    * `single_cell`
+    * `sex`
+    * `age`
+    * `biomaterial_provider`
+
+All fields are explained in the previous section, with the only difference being that there is only one filename column for the assembled input samplesheet. The provided file will be different from assembled single-cell or bulk data:
+
+* `filename` for single-cell assembled data: path to `airr_rearrangement.tsv` file, for example the one generated when processing the 10x Genomics scBCRseq / scTCRseq with 10x Genomics cellranger `cellranger vdj` or `cellranger multi`.
+    * The field accepts any tsv tables following the AIRR rearrangement Schema specification.
+* `filename` for bulk assembled data: path to `sequences.fasta` file, containing the assembled and error-corrected reads.
+
+The required input file for processing raw BCR or TCR bulk targeted sequencing data is a sample sheet in TSV format (tab separated). The columns `sample_id`, `filename`, `subject_id`, `species`, `tissue`, `single_cell`, `pcr_target_locus`, `sex`, `age` and `biomaterial_provider` are required.
+
+An example samplesheet is:
+
+| filename                                    | species | subject_id | sample_id              | tissue | sex  | age | biomaterial_provider | pcr_target_locus | single_cell |
+| -                                           | -       | -          | -                      | -      | -    | -   | -                    | -                | -           |
+| sc5p_v2_hs_PBMC_1k_b_airr_rearrangement.tsv | human   | subject_x  | sc5p_v2_hs_PBMC_1k_5fb | PBMC   | NA   | NA  | 10x Genomics         | IG               | TRUE        |
+| bulk-Laserson-2014.fasta                    | human   | PGP1       | PGP1                   | PBMC   | male | NA  | Laserson-2014        | IG               | FALSE       |
