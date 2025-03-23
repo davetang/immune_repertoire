@@ -93,6 +93,34 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:F:FFFFFF:FFFFFFFFFFFFFF
 
 ### Cell Ranger
 
+[Cell Ranger V(D)J Algorithms Overview](https://support.10xgenomics.com/single-cell-vdj/software/pipelines/latest/algorithms/overview):
+
+* The `cellranger vdj` pipeline can be used to analyze sequencing data produced from Chromium Next GEM Single Cell 5′ V(D)J libraries.
+* It takes FASTQ files from `cellranger mkfastq` or `bcl2fastq` for V(D)J libraries and performs sequence assembly and paired clonotype calling.
+* The pipeline uses the Chromium Cell Barcodes (also called 10x Barcodes) and UMIs to assemble V(D)J transcripts per cell.
+* Clonotypes and CDR3 sequences are output as a .vloupe file which can be loaded into Loupe V(D)J Browser.
+
+![](vdj-algorithm-workflow.png)
+
+Assemble contigs:
+
+* Filter out reads with noisy barcodes and UMIs that may arise from PCR errors, sequencing errors, etc.
+* Trim adaptors and primer sequences from 5' and 3' ends of the reads.
+* Generate full-length transcripts (contigs) from each chain in all observed GEMs/barcodes.
+
+Annotate contigs
+
+* Annotate contigs with V(D)J segment labels and locate CDR3 regions that form the transcript.
+* Filter contigs that are full-length and productive.
+
+Call cells
+
+* Identify barcodes/GEMs that contain T or B cells.
+
+Generate clonotypes
+
+* Group cell-associated barcodes into clonotypes and filter out some cells.
+
 Run Cell Ranger vdj.
 
 ```console
