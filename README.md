@@ -22,6 +22,8 @@
 
 ## 10x Genomics V(D)J Platform
 
+> The Chromium Single Cell Immune Profiling solution allows for simultaneous generation of full-length, paired V(D)J sequences, as well as gene expression, cell surface protein expression, and antigen specificity data at a single cell level. The assay partitions thousands of cells into nanoliter-scale Gel Beads-in-emulsion (GEMs), where all generated cDNA within a single droplet share a common 10x Barcode. Libraries are generated and sequenced from the cDNA and the 10x Barcodes are used to associate each read back to its individual partition.
+
 * The **10x Genomics Chromium Single Cell Immune Profiling** platform allows high-throughput single-cell sequencing of V(D)J regions for both BCRs and TCRs.
 * Antigen receptor sequences are typically linked to single-cell gene expression data.
 * The **Chromium Controller** encapsulates single cells into droplets, each containing a unique barcoded bead.
