@@ -17,8 +17,24 @@
 
 # Introduction
 
-* Immune repertoire analysis is the study of the **diversity** and **composition** of antigen receptors expressed by B Cells Receptors (BCRs) and T Cells Receptors (TCRs).
-* By sequencing the Variable (V), Diversity (D), and Joining (J) gene segments of these receptors, we can assess the clonal diversity, expansion, and specificity of immune cells in different conditions.
+V(D)J analysis refers to the process of examining the **rearrangement of variable (V), diversity (D), and joining (J)** gene segments, which are essential for generating the diversity of B-cell receptors (BCRs) and T-cell receptors (TCRs) in the adaptive immune system. During the development of B and T lymphocytes, B cells produce BCRs, which become antibodies when secreted and T cells produce TCRs. Both receptors are formed by the **random recombination** of V, D, and J gene segments, creating an enormous diversity of antigen receptors, enabling the immune system to recognise a vast array of pathogens.
+
+V(D)J analysis is performed to:
+
+1. Characterise immune repertoires - Understand the diversity and clonality of BCR and TCR populations.
+2. Identify clonal expansions - Often associated with infections, autoimmune diseases, or cancers.
+3. Track immune responses - Detect changes in the immune repertoire following vaccination, infection, or therapy.
+4. Detect minimal residual disease (MRD) - Identify low levels of leukemia/lymphoma cells post-treatment.
+5. Study immune-related disorders - Analyse immune dysregulation or deficiencies.
+
+High-throughput sequencing (HTS) is performed to sequence the CDR3 region, which is highly diverse due to V(D)J recombination. This can reveals BCR/TCR diversity, clonal expansions, and immune repertoire changes. Single-cell RNA sequencing (scRNA-seq) combines transcriptomics with V(D)J analysis and allows for paired-chain analysis at the single-cell level.
+
+Key Metrics in V(D)J Analysis include:
+
+* Clonotype frequency - Measures how often a specific receptor sequence appears, indicating clonal expansion.
+* Diversity indices - Assess receptor diversity (e.g., Shannon or Simpson index).
+* CDR3 length and composition - Critical for antigen specificity and immune diversity.
+* Mutation rates - In BCRs, somatic hypermutation (SHM) adds further diversity.
 
 ## 10x Genomics V(D)J Platform
 
