@@ -581,3 +581,9 @@ If you get the error:
     Error for field 'sample_id' (1984): Sample name must be provided and cannot contain spaces
 
 but have doubled-checked that you have provided a `sample_id` without spaces, it is because `sample_id`s cannot be just numbers.
+
+The error:
+
+    Automatic clone_threshold is 'NA'. Consider setting --clonal_threshold manually.
+
+See the [GitHub issue](https://github.com/nf-core/airrflow/issues/322), which contains explanations and relevant links.
