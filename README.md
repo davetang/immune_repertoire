@@ -575,3 +575,9 @@ Caused by:
 Finally `-[nf-core/airrflow] Pipeline completed successfully-`; results uploaded to <https://davetang.org/nfcore_airrflow/results/>.
 
 (Final note: removed `-process.cpus=4` from `./nfcore_airrflow.sh` and the workflow could still successfully complete.)
+
+If you get the error:
+
+    Error for field 'sample_id' (1984): Sample name must be provided and cannot contain spaces
+
+but have doubled-checked that you have provided a `sample_id` without spaces, it is because `sample_id`s cannot be just numbers.
